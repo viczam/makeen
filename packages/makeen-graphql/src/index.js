@@ -11,6 +11,7 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import merge from 'lodash/merge';
 import { makeExecutableSchema } from 'graphql-tools';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
+import { express as playground } from 'graphql-playground/middleware';
 import mainResolvers from './graphql/resolvers';
 import modulesResolvers from './graphql/modulesResolvers';
 
@@ -21,6 +22,9 @@ class Gql extends Module {
       resolvers: Joi.array().default([]),
     }),
     graphiql: Joi.object().keys({
+      enabled: Joi.boolean().default(true),
+    }),
+    playground: Joi.object().keys({
       enabled: Joi.boolean().default(true),
     }),
     voyager: Joi.object().keys({
@@ -72,6 +76,7 @@ class Gql extends Module {
       this.getGraphQLMiddleware(schema),
       this.getGraphiQLMiddleware(),
       this.getVoyagerMiddleware(),
+      this.getPlaygroundMiddleware(),
     );
 
     this.export({
@@ -208,8 +213,23 @@ class Gql extends Module {
     return {
       id: 'voyager',
       path: '/voyager',
-      factory: () => voyagerMiddleware({ endpointUrl: '/graphql' }),
+      factory: ({ endpointURL }) => voyagerMiddleware({ endpointUrl: endpointURL }),
+      params: {
+        endpointURL: '/graphql',
+      },
       enabled: this.getConfig('voyager.enabled'),
+    };
+  }
+
+  getPlaygroundMiddleware() {
+    return {
+      id: 'playground',
+      path: '/playground',
+      factory: ({ endpointURL }) => playground({ endpointUrl: endpointURL }),
+      params: {
+        endpointURL: '/graphql',
+      },
+      enabled: this.getConfig('playground.enabled'),
     };
   }
 }
