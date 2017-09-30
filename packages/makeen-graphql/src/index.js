@@ -7,7 +7,7 @@ import set from 'lodash/set';
 import has from 'lodash/has';
 import identity from 'lodash/identity';
 import { Module } from 'makeen';
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import merge from 'lodash/merge';
 import { makeExecutableSchema } from 'graphql-tools';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
