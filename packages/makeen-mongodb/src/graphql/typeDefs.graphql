@@ -1,7 +1,7 @@
 type MongoQuery {
   filters: JSON
-  offset: Number
-  limit: Number
+  offset: Int
+  limit: Int
   orderBy: [SortItem!]
 }
 
