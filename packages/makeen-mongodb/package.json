@@ -18,6 +18,7 @@
     "makeen": "^1.4.5",
     "mongo-dnorm": "0.2.4",
     "mongodb": "2.2.27",
+    "mongodb-extended-json": "^1.10.0",
     "octobus-crud": "0.6.0",
     "octobus-mongodb-store": "0.5.0"
   }
