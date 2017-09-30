@@ -1,6 +1,6 @@
 {
   "name": "makeen-mongodb",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Makeen database storage module providing MongoDB integration.",
   "main": "build/index.js",
   "repository": {
